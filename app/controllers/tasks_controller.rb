@@ -10,6 +10,7 @@ class TasksController < ApplicationController
   end
 
   def create
+    # binding.pry
     @task = Task.new(task_params)
     if @task.save
       redirect_to tasks_path, notice: "登録が完了しました"
