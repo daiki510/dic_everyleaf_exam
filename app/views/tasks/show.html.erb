@@ -1,0 +1,15 @@
+<div class="container">
+  <h1>タスク詳細</h1>
+
+  <div class="task-info">
+    <ul>
+      <li><strong>タイトル:</strong> <%= @task.title %></li>
+      <li><strong>内容:</strong> <%= @task.content %></li>
+    </ul>
+  </div>
+
+  <div class="menus">
+    <%= link_to "edit", edit_task_path %>
+    <%= link_to "back", tasks_path %>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+<div class="container">
+  <div class="edit-form">
+    <h1>タスク編集</h1>
+
+    <%= render 'form' %>
+
+    <div class="menus">
+      <%= link_to "show", task_path(@task.id) %>
+      <%= link_to "back", tasks_path %>
+    </div>
+  </div>
+</div>
