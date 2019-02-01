@@ -39,6 +39,26 @@
 | task_id  | integer  |     タスクID     |
 | label_id | integer  |     ラベルID     |
 
+<br>
 
+## herokuへのデプロイ方法
+1. `rails assets:precompile RAILS_ENV=production`<br>
+→ アセットを事前にコンパイル（実際に実行できる形式に変換）する
+2. gitを最新状態へ masterへpushまで実行
+3. `heroku login (--interactive)`<br>
+→ IDとパスワードを入力
+4. `heroku create`
+5. `git push heroku master`
+6. `heroku run rails db:migrate`<br>
+→ herokuへデータベースの移行
 
+<br>
 
+## 開発環境
+Rails 5.2.2
+
+Ruby 2.5.3
+
+Bunlder 2.0.1
+
+Rspec-rails 3.8.2
