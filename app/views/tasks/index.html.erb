@@ -1,17 +1,18 @@
 <div class="container">
   <div class="task-index"></div>
   <h1>タスク一覧</h1>
-  <p>Githubとherokuの連携確認</p>
   <table>
     <tr>
       <th id="title">タイトル</th>
       <th id="content">内容</th>
+      <th id="deadline">終了期限</th>
     </tr>
 
     <% @tasks.each do |task| %>
       <tr>
         <td><%= task.title %></td>
         <td><%= task.content %></td>
+        <td><%= task.deadline %></td>
 
         <td><%= link_to "詳細", task_path(task.id) %></td>
         <td><%= link_to "編集", edit_task_path(task.id) %></td>
@@ -21,4 +22,6 @@
   </table>
 
   <%= link_to "タスクを登録する", new_task_path %>
+  <%= link_to "終了期限でソートする", tasks_path(sort_expired: "true") %>
+  <%= link_to "通常の並び順にする", tasks_path %>
 </div>
