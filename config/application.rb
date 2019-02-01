@@ -7,6 +7,8 @@ Bundler.require(*Rails.groups)
 module DicEveryleafExamApp
   class Application < Rails::Application
     config.load_defaults 5.2
+    # タイムゾーンを日本に設定
+    config.time_zone = 'Tokyo'
 
     #rails gコマンドで自動生成されないように設定
     config.generators do |g|
