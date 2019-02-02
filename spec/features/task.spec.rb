@@ -44,8 +44,20 @@ RSpec.feature "タスク管理機能", type: :feature do
 
   scenario "タスクが作成日時の降順に並んでいるかのテスト" do
     visit tasks_path
-    # save_and_open_page
     expect(Task.order("created_at DESC").map(&:id)).to eq [9,8]
+  end
+  
+  scenario "タスクに終了期限が登録されているのかをテスト" do
+    visit new_task_path
+    
+    fill_in "タイトル",	with: "終了期限" 
+    fill_in "内容",	with: "機能の追加" 
+    fill_in "終了期限",	with: "2019-02-10" 
+    
+    click_on '登録する'
+    
+    save_and_open_page
+    expect(page).to  have_content '2019-02-10'
   end
 end
 
