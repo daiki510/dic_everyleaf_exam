@@ -1,7 +1,7 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
-  PER = 10
+  PER = 8
 
   def index
     #終了期限でソート
