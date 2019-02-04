@@ -3,12 +3,12 @@
   <h1>タスク一覧</h1>
 
   <%= form_with url:'/tasks', method: :get, local: true do |f| %>
-    <%= f.label :title, 'Search title' %>
+    <%= f.label :title, 'タイトル検索' %>
     <%= f.text_field :title %>
-    <%= f.label :status, 'Search status' %>
+    <%= f.label :status, 'ステータス検索' %>
     <%= f.select :status,[["未着手", "未着手"],["着手中","着手中"],["完了","完了"]], include_blank: true  %>
     <%# <%= f.hidden_field :search, value: 'true' %>
-    <%= f.submit 'Search' %> <%= link_to 'Clear', tasks_path %>
+    <%= f.submit '検索' %> <%= link_to 'クリア', tasks_path %>
   <% end %>
 
   <table>
