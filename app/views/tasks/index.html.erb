@@ -7,7 +7,6 @@
     <%= f.text_field :title %>
     <%= f.label :status, 'ステータス検索' %>
     <%= f.select :status,[["未着手", "未着手"],["着手中","着手中"],["完了","完了"]], include_blank: true  %>
-    <%# <%= f.hidden_field :search, value: 'true' %>
     <%= f.submit '検索' %> <%= link_to 'クリア', tasks_path %>
   <% end %>
 
