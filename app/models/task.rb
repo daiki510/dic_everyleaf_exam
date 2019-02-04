@@ -10,6 +10,7 @@ class Task < ApplicationRecord
 
   #scope: 絞り込み検索機能
   scope :sort_deadline, -> { order(deadline: :desc) }
+  scope :sort_priority, -> { order(priority: :desc) }
   scope :sort_create, -> { order(created_at: :desc) }
   scope :search_with_title, -> (title){ where('title LIKE ?' , "%#{title}%") }
   scope :search_with_status, -> (status){ where('status LIKE ?' , "%#{status}%") }
