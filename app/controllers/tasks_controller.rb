@@ -1,7 +1,7 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
-  PER = 5
+  PER = 10
 
   def index
     if params[:sort_expired]
