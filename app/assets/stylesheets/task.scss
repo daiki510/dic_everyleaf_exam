@@ -118,7 +118,53 @@ table a:hover {
 //  =================================================================
 //  タスク詳細
 //  =================================================================
+.task-info {
+  margin-bottom: 0.75em;
+  width: 100%;
+}
 
+.task-info ul {
+  background: #fafafa;
+  border: none;
+  border-bottom: 2px solid #e9e9e9;
+  color: #666;
+  font-size: 1.5em;
+  height: auto;
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.task-info li {
+  // display: block;
+  width: 100%;
+}
+
+.task-info .info-title {
+  font-size: 0.7em;
+}
+
+.task-show .form-footer a {
+  margin-right: 20px;
+  font-size: 1.2em;
+}
+
+.task-show .form-footer a:last-child {
+  margin-right: 0;
+}
+
+// .task-info input#task_deadline,
+// .task-info select#task_status,
+// .task-info select#task_priority {
+//   background: #fafafa;
+//   border: none;
+//   border-bottom: 2px solid #e9e9e9;
+//   color: #666;
+//   font-size: 1.2em;
+//   height: 50px;
+//   transition: border-color 0.3s;
+//   width: 50%;
+//   padding-left: 20px;
+// }
 
 
 //  =================================================================
@@ -147,7 +193,10 @@ table a:hover {
 }
 
 .form-item input#task_title,
-.form-item textarea {
+.form-item textarea,
+.form-item input#task_deadline,
+.form-item select#task_status,
+.form-item select#task_priority {
   background: #fafafa;
   border: none;
   border-bottom: 2px solid #e9e9e9;
@@ -158,16 +207,15 @@ table a:hover {
   width: 100%;
 }
 
+.form-item textarea {
+  height: auto;
+}
+
 .form-item input#task_deadline,
 .form-item select#task_status,
 .form-item select#task_priority {
-  background: #fafafa;
-  border: none;
-  border-bottom: 2px solid #e9e9e9;
-  color: #666;
   font-size: 1.2em;
   height: 50px;
-  transition: border-color 0.3s;
   width: 50%;
   padding-left: 20px;
 }
@@ -235,7 +283,7 @@ table a:hover {
 
 
 //  =================================================================
-//  タスク編集
+//  タスク　ボタンデザイン
 //  =================================================================
 
 .new_task_btn {
@@ -272,7 +320,11 @@ table a:hover {
   text-decoration: none;
 }
 
-// .page-link {
-//   background-color: #668ad8;
-//   border-color: #668ad8;
-// }
+.page-item.active .page-link {
+  background-color: #767777;
+  border-color: #767777;
+}
+
+.page-item .page-link {
+  color: #696867;
+}

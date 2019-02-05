@@ -11,10 +11,14 @@
 
   <body>
     <header>
-      <h1>タスク管理アプリ</h1>
+      <h1>Task App</h1>
     </header>
 
-    <%= notice %>
+    <!-- フラッシュメッセージ -->
+    <% flash.each do |key, value| %>
+      <%= content_tag(:div, value, class: "#{key}") %>
+    <% end %>
+    
 
     <%= yield %>
 

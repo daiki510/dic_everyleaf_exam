@@ -42,14 +42,12 @@
             <%= link_to task_path(task.id), method: :get do %>
               <%= fa_icon 'info 1.5x' %>
             <% end %>
-          <%# </td>
-          <td> %>
+         
             <%= link_to edit_task_path(task.id), method: :get do %>
               <%= fa_icon 'edit 1.5x' %>
             <% end %>
-          <%# </td>
-          <td> %>
-            <%= link_to task_path(task.id), method: :get do %>
+          
+            <%= link_to task_path(task), method: :delete, data: { confirm: '本当に削除してもいいですか?' } do %>
               <%= fa_icon 'trash 1.5x' %>
             <% end %>
           </td>

@@ -20,7 +20,7 @@ class TasksController < ApplicationController
     elsif params[:status]
       @tasks = search_with_status(params[:status]).page(params[:page]).per(PER)
     else
-      @tasks = Task.page(params[:page]).per(PER)
+      @tasks = Task.sort_create.page(params[:page]).per(PER)
     end
   end
 
