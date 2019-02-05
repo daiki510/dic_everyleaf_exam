@@ -6,7 +6,8 @@ FactoryBot.define do
   factory :task do
     title { 'test_task_01' }
     content { 'testtesttest' }
-    deadline { Time.now }
+    deadline { '2019-02-03' }
+    status {'完了'}
   end
 
   # 作成するテストデータの名前を「second_task」とします
@@ -14,6 +15,7 @@ FactoryBot.define do
   factory :second_task, class: Task do
     title { 'test_task_02' }
     content { 'samplesample' }
-    deadline { Time.now }
+    deadline { '2019-02-03' }
+    status {'着手中'}
   end
 end

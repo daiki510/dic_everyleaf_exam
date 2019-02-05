@@ -3,12 +3,18 @@ class TasksController < ApplicationController
 
   def index
     if params[:sort_expired]
-      @tasks = Task.all.order(deadline: :desc)
+      @tasks = Task.all.sort_deadline
+    elsif params[:title] && params[:status]
+      @tasks = Task.search_with_title(params[:title]).search_with_status(params[:status])
+    elsif params[:title]
+      @tasks = search_with_title(params[:title])
+    elsif params[:status]
+      @tasks = search_with_status(params[:status])
     else
-      @tasks = Task.all.order(created_at: :desc)
+      @tasks = Task.all.sort_create
     end
   end
-  
+
   def new
     @task = Task.new
   end
@@ -48,7 +54,7 @@ class TasksController < ApplicationController
   end
   
   def task_params
-    params.require(:task).permit(:title, :content, :deadline)
+    params.require(:task).permit(:title, :content, :deadline, :status)
   end
 
 end
