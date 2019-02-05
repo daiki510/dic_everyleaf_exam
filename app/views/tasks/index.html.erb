@@ -8,12 +8,12 @@
         <%= f.text_field :title %>
         <%= f.label :status, 'ステータス検索' %>
         <%= f.select :status,[["未着手", "未着手"],["着手中","着手中"],["完了","完了"]], include_blank: true  %>
-        <%= f.submit '検索' ,class: "search-btn"%> <%= link_to 'クリア', tasks_path %>
+        <%= f.submit '検索' ,class: "search-btn"%> <%= link_to 'クリア', tasks_path  ,class: "clear_btn"%>
       <% end %>
     </div>
 
     <div class="task-menus">
-      <%= link_to "タスク登録", new_task_path, class: "btn btn-primary" %>
+      <%= link_to "タスク登録", new_task_path ,class: "new_task_btn" %>
       <span>ソート: </span>
       <%= link_to "作成順", tasks_path , class: "sort-menus" %>
       <%= link_to "終了期限", tasks_path(sort_expired: "true"), class: "sort-menus" %>
