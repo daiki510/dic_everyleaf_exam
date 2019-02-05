@@ -1,19 +1,21 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
+  PER = 10
+
   def index
     if params[:sort_expired]
-      @tasks = Task.all.sort_deadline
+      @tasks = Task.all.sort_deadline.page(params[:page]).per(PER)
     elsif params[:sort_priority]
-      @tasks = Task.all.sort_priority
+      @tasks = Task.all.sort_priority.page(params[:page]).per(PER)
     elsif params[:title] && params[:status]
-      @tasks = Task.search_with_title(params[:title]).search_with_status(params[:status])
+      @tasks = Task.search_with_title(params[:title]).search_with_status(params[:status]).page(params[:page]).per(PER)
     elsif params[:title]
-      @tasks = search_with_title(params[:title])
+      @tasks = search_with_title(params[:title]).page(params[:page]).per(PER)
     elsif params[:status]
-      @tasks = search_with_status(params[:status])
+      @tasks = search_with_status(params[:status]).page(params[:page]).per(PER)
     else
-      @tasks = Task.all.sort_create
+      @tasks = Task.page(params[:page]).per(PER)
     end
   end
 

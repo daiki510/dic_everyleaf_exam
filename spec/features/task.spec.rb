@@ -35,13 +35,13 @@ RSpec.feature "タスク管理機能", type: :feature do
 
     click_link '詳細', match: :first
 
-    expect(page).to have_content 'samplesample'
+    expect(page).to have_content 'testtesttest'
   end
 
   #タスク並び替えのテスト
   scenario "タスクが作成日時の降順に並んでいるかのテスト" do
     visit tasks_path
-
+    
     expect(Task.order("created_at DESC").map(&:id)).to eq [9,8]
   end
   
@@ -80,7 +80,6 @@ RSpec.feature "タスク管理機能", type: :feature do
     select '完了', from: 'ステータス'
     select '中', from: '優先順位'
 
-    
     click_on '登録する'
     
     save_and_open_page
