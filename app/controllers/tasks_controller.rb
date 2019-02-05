@@ -1,21 +1,26 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
-  PER = 10
+  PER = 8
 
   def index
+    #終了期限でソート
     if params[:sort_expired]
       @tasks = Task.all.sort_deadline.page(params[:page]).per(PER)
+    #優先順位でソート
     elsif params[:sort_priority]
       @tasks = Task.all.sort_priority.page(params[:page]).per(PER)
+    #タイトルとステータスで検索
     elsif params[:title] && params[:status]
       @tasks = Task.search_with_title(params[:title]).search_with_status(params[:status]).page(params[:page]).per(PER)
+    #タイトルで検索
     elsif params[:title]
       @tasks = search_with_title(params[:title]).page(params[:page]).per(PER)
+    #ステータスで検索
     elsif params[:status]
       @tasks = search_with_status(params[:status]).page(params[:page]).per(PER)
     else
-      @tasks = Task.page(params[:page]).per(PER)
+      @tasks = Task.sort_create.page(params[:page]).per(PER)
     end
   end
 

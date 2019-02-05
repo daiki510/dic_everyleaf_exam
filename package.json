@@ -1,5 +1,9 @@
 {
   "name": "dic_everyleaf_exam_app",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "bootstrap": "4",
+    "jquery": "^3.3.1",
+    "ress": "^1.2.2"
+  }
 }

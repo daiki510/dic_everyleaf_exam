@@ -10,14 +10,20 @@
   </head>
 
   <body>
-    <%# <header> %>
-    <%# </header> %>
+    <header>
+      <h1>Task App</h1>
+    </header>
 
-    <%= notice %>
+    <!-- フラッシュメッセージ -->
+    <% flash.each do |key, value| %>
+      <%= content_tag(:div, value, class: "#{key}") %>
+    <% end %>
+    
 
     <%= yield %>
 
-    <%# <footer>
-    </footer> %>
+    <footer>
+      <p>©︎task_app</p>
+    </footer>
   </body>
 </html>

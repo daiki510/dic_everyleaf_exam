@@ -1,42 +1,63 @@
 <div class="container">
-  <div class="task-index"></div>
-  <h1>タスク一覧</h1>
+  <div class="task-index">
+    <h1>タスク一覧</h1>
 
-  <%= form_with url:'/tasks', method: :get, local: true do |f| %>
-    <%= f.label :title, 'タイトル検索' %>
-    <%= f.text_field :title %>
-    <%= f.label :status, 'ステータス検索' %>
-    <%= f.select :status,[["未着手", "未着手"],["着手中","着手中"],["完了","完了"]], include_blank: true  %>
-    <%= f.submit '検索' %> <%= link_to 'クリア', tasks_path %>
-  <% end %>
+    <div class="search-box">
+      <%= form_with url:'/tasks', method: :get, local: true do |f| %>
+        <%= f.label :title, 'タイトル検索' %>
+        <%= f.text_field :title %>
+        <%= f.label :status, 'ステータス検索' %>
+        <%= f.select :status,[["未着手", "未着手"],["着手中","着手中"],["完了","完了"]], include_blank: true  %>
+        <%= f.submit '検索' ,class: "search-btn"%> <%= link_to 'クリア', tasks_path  ,class: "clear_btn"%>
+      <% end %>
+    </div>
 
-  <table>
-    <tr>
-      <th id="title">タイトル</th>
-      <th id="content">内容</th>
-      <th id="deadline">終了期限</th>
-      <th id="status">ステータス</th>
-      <th id="priority">優先順位</th>
-    </tr>
+    <div class="task-menus">
+      <%= link_to "タスク登録", new_task_path ,class: "new_task_btn" %>
+      <span>ソート: </span>
+      <%= link_to "作成順", tasks_path , class: "sort-menus" %>
+      <%= link_to "終了期限", tasks_path(sort_expired: "true"), class: "sort-menus" %>
+      <%= link_to "優先順位", tasks_path(sort_priority: "true"), class: "sort-menus" %>
+    </div>
 
-    <% @tasks.each do |task| %>
+    <table border="1">
       <tr>
-        <td><%= task.title %></td>
-        <td><%= task.content %></td>
-        <td><%= task.deadline %></td>
-        <td><%= task.status %></td>
-        <td><%= task.priority %></td>
-
-        <td><%= link_to "詳細", task_path(task.id) %></td>
-        <td><%= link_to "編集", edit_task_path(task.id) %></td>
-        <td><%= link_to "削除", task_path(task.id), method: :delete,  data: { confirm: '本当に削除していいですか？' } %></td>
+        <th id="title">タイトル</th>
+        <th id="content">内容</th>
+        <th id="deadline">終了期限</th>
+        <th id="status">ステータス</th>
+        <th id="priority">優先順位</th>
+        <th id="task-menu" colspan="3">メニュー</th>
       </tr>
-    <% end %>
-    <%= paginate @tasks %>
-  </table>
 
-  <%= link_to "タスクを登録する", new_task_path %>
-  <%= link_to "終了期限でソートする", tasks_path(sort_expired: "true") %>
-  <%= link_to "優先順位でソートする", tasks_path(sort_priority: "true") %>
-  <%= link_to "通常の並び順にする", tasks_path %>
+      <% @tasks.each do |task| %>
+        <tr>
+          <td><%= task.title %></td>
+          <td><%= task.content %></td>
+          <td><%= task.deadline %></td>
+          <td><%= task.status %></td>
+          <td><%= task.priority %></td>
+
+          <td>
+            <%= link_to task_path(task.id), method: :get do %>
+              <%= fa_icon 'info 1.5x' %>
+            <% end %>
+         
+            <%= link_to edit_task_path(task.id), method: :get　,class: "setting-link" do %>
+              <%= fa_icon 'edit 1.5x' %>
+            <% end %>
+          
+            <%= link_to task_path(task), method: :delete, data: { confirm: '本当に削除してもいいですか?' } do %>
+              <%= fa_icon 'trash 1.5x' %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+    <%= paginate @tasks %>
+
+    
+
+    
+  </div>
 </div>

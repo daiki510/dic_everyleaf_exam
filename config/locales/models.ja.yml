@@ -9,4 +9,11 @@ ja:
         deadline: "終了期限"
         status: "ステータス"
         priority: "優先順位"
+  views:
+    pagination:
+      first: "最初"
+      last: "最後"
+      previous: "« 前ページ"
+      next: "次ページ »"
+      truncate: "..."
       
