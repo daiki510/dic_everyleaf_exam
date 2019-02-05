@@ -19,4 +19,10 @@ module SessionsHelper
       redirect_to tasks_path, notice: "ログイン済です"
     end
   end
+
+  def enssure_correct_user
+    if current_user.id != params[:id].to_i
+      redirect_to user_path(current_user.id), notice: "権限がありません"
+    end
+  end
 end
