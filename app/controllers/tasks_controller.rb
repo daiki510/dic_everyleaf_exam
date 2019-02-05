@@ -1,5 +1,6 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user
 
   PER = 8
 
@@ -26,10 +27,12 @@ class TasksController < ApplicationController
 
   def new
     @task = Task.new
+    
   end
 
   def create
     @task = Task.new(task_params)
+    @task.user_id = current_user.id
     if @task.save
       redirect_to tasks_path, notice: "登録が完了しました"
     else
