@@ -7,7 +7,6 @@
     <%= f.text_field :title %>
     <%= f.label :status, 'ステータス検索' %>
     <%= f.select :status,[["未着手", "未着手"],["着手中","着手中"],["完了","完了"]], include_blank: true  %>
-    <%# <%= f.hidden_field :search, value: 'true' %>
     <%= f.submit '検索' %> <%= link_to 'クリア', tasks_path %>
   <% end %>
 
@@ -17,6 +16,7 @@
       <th id="content">内容</th>
       <th id="deadline">終了期限</th>
       <th id="status">ステータス</th>
+      <th id="priority">優先順位</th>
     </tr>
 
     <% @tasks.each do |task| %>
@@ -25,6 +25,7 @@
         <td><%= task.content %></td>
         <td><%= task.deadline %></td>
         <td><%= task.status %></td>
+        <td><%= task.priority %></td>
 
         <td><%= link_to "詳細", task_path(task.id) %></td>
         <td><%= link_to "編集", edit_task_path(task.id) %></td>
@@ -35,5 +36,6 @@
 
   <%= link_to "タスクを登録する", new_task_path %>
   <%= link_to "終了期限でソートする", tasks_path(sort_expired: "true") %>
+  <%= link_to "優先順位でソートする", tasks_path(sort_priority: "true") %>
   <%= link_to "通常の並び順にする", tasks_path %>
 </div>
