@@ -1,6 +1,8 @@
 class TasksController < ApplicationController
+  before_action :enssure_correct_user_for_task, only: [:show, :edit, :update, :destroy]
   before_action :set_task, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user
+ 
 
   PER = 8
 
@@ -19,7 +21,8 @@ class TasksController < ApplicationController
       @tasks = search_with_status(params[:status])#ステータスで検索
     end
 
-    @tasks = @tasks.page(params[:page]).per(PER)#ページネーション追加
+    #ログインしているユーザーのみTaskデータを取り出す
+    @tasks = current_user.tasks.page(params[:page]).per(PER)#ページネーション追加
   end
 
   def new
@@ -58,11 +61,19 @@ class TasksController < ApplicationController
   private
 
   def set_task
-     @task = Task.find(params[:id])
+     @task = current_user.tasks.find(params[:id])
   end
   
   def task_params
     params.require(:task).permit(:title, :content, :deadline, :status, :priority)
+  end
+
+  #ログインしているユーザーのみタスク管理できる
+  def enssure_correct_user_for_task
+    @task = Task.find(params[:id])
+    if current_user.id != @task.user_id
+      redirect_to tasks_path, notice: "権限がありません"
+    end
   end
 
 end

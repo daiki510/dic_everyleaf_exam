@@ -25,4 +25,5 @@ module SessionsHelper
       redirect_to user_path(current_user.id), notice: "権限がありません"
     end
   end
+  
 end

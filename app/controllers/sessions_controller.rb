@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
     
     if user && user.authenticate(params[:session][:password])
       session[:user_id] = user.id
-      redirect_to user_path(user.id), notice: "ログインしました"
+      redirect_to tasks_path, notice: "ログインしました"
     else
       render "new", notice: "ログインに失敗しました"
     end
