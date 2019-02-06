@@ -5,24 +5,21 @@ class TasksController < ApplicationController
   PER = 8
 
   def index
-     @tasks = Task.sort_create.page(params[:page]).per(PER)
-    
-    #終了期限でソート
-    @tasks = Task.all.sort_deadline.page(params[:page]).per(PER) if params[:sort_expired]
+    #ソート
+    @tasks = Task.sort_create #作成順
+    @tasks = Task.all.sort_deadline if params[:sort_expired] #終了期限
+    @tasks = Task.all.sort_priority if params[:sort_priority]#優先順位
 
-    #優先順位でソート
-    @tasks = Task.all.sort_priority.page(params[:page]).per(PER) if params[:sort_priority]
-
-    #タイトルとステータスで検索
+    #検索
     if params[:title] && params[:status]
-      @tasks = Task.search_with_title(params[:title]).search_with_status(params[:status]).page(params[:page]).per(PER)
-    #タイトルで検索
+      @tasks = Task.search_with_title(params[:title]).search_with_status(params[:status])#タイトルとステータスで検索
     elsif params[:title]
-      @tasks = search_with_title(params[:title]).page(params[:page]).per(PER)
-    #ステータスで検索
+      @tasks = search_with_title(params[:title])#タイトルで検索
     elsif params[:status]
-      @tasks = search_with_status(params[:status]).page(params[:page]).per(PER)
+      @tasks = search_with_status(params[:status])#ステータスで検索
     end
+
+    @tasks = @tasks.page(params[:page]).per(PER)#ページネーション追加
   end
 
   def new
@@ -33,7 +30,7 @@ class TasksController < ApplicationController
   def create
     @task = current_user.tasks.build(task_params)  #ログイン中のユーザーのidを渡す
     if @task.save
-      redirect_to tasks_path, notice: "登録が完了しました"
+      redirect_to tasks_path, notice: "タスク「#{@task.title}」を登録しました"
     else
       render "new"
     end
@@ -47,7 +44,7 @@ class TasksController < ApplicationController
 
   def update
     if @task.update(task_params)
-      redirect_to tasks_path, notice: "編集が完了しました"
+      redirect_to tasks_path, notice: "タスク「#{@task.title}」を編集しました"
     else
       render "edit"
     end
@@ -55,7 +52,7 @@ class TasksController < ApplicationController
   
   def destroy
     @task.destroy
-    redirect_to tasks_path, notice: "タスクを削除しました"
+    redirect_to tasks_path, notice: "タスク「#{@task.title}」を削除しました"
   end
   
   private
