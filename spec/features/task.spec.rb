@@ -4,9 +4,9 @@ RSpec.feature "タスク管理機能", type: :feature do
 
   #テストで使用するデータを共通化
   background do
-    FactoryBot.create(:task)
+    FactoryBot.build(:task)
     # FactoryBot.create(:task, title: '付け加えた名前１')
-    FactoryBot.create(:second_task)
+    FactoryBot.build(:second_task)
   end
 
   #タスク一覧のテスト
