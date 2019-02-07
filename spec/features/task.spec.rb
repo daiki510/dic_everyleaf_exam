@@ -1,37 +1,55 @@
 require 'rails_helper'
 
 RSpec.feature "タスク管理機能", type: :feature do
+  #ユーザー1を作成する
+  let(:user_01) { FactoryBot.create(:user, name: 'testuser_01', email: 'testuser_01@gmail.com') } 
+  #ユーザー2を作成する
+  let(:user_02) { FactoryBot.create(:user, name: 'testuser_02', email: 'testuser_02@gmail.com') } 
+  #ユーザー1でタスク1を作成する
+  let!(:task_01) { FactoryBot.create(:task, user: user_01) } 
+
+  before do
+    #ユーザー1でログインする
+    visit new_session_path
+    fill_in 'Email', with: login_user.email
+    fill_in 'Password',	with: login_user.password
+    click_button 'Log in'
+  end
+
   feature '一覧表示機能' do
-    #ユーザー１を作成する
-    let(:user_01) { FactoryBot.create(:user, name: 'testuser_01', email: 'testuser_01@gmail.com') } 
-    let(:user_02) { FactoryBot.create(:user, name: 'testuser_02', email: 'testuser_02@gmail.com') } 
-
-    before do
-      #作成者がユーザー１であるタスクを作成する
-      FactoryBot.create(:task, user: user_01)
-
-      #ユーザー1でログインする
-      visit new_session_path
-      fill_in 'Email', with: login_user.email
-      fill_in 'Password',	with: login_user.password
-      click_button 'Log in'
-    end
-
     context "ユーザー1がログインしている時" do
       let(:login_user) { user_01 } 
 
       scenario "ユーザー1が作成したタスクが表示される" do
         #作成済みのタスクの名称が画面上に表示されていることを確認
+        save_and_open_page
         expect(page).to have_content 'testtesttest'
       end
     end
+
     context "ユーザー2がログインしている時" do
       let(:login_user) { user_02 } 
 
       scenario "ユーザー1が作成したタスクが表示されない" do
         #作成済みのタスクの名称が画面上に表示されないことを確認
-        save_and_open_page
         expect(page).not_to have_content 'testtesttest'
+      end
+    end
+  end
+
+  feature '詳細表示機能' do
+    context "ユーザー1がログインしている時" do
+      let(:login_user) { user_01 } 
+
+      before do
+        #詳細画面に移動
+        visit task_path(task_01)
+        save_and_open_page
+      end
+
+      scenario "ユーザー1が作成したタスクが表示される" do
+        save_and_open_page
+        expect(page).to have_content 'testtesttest'
       end
     end
   end
