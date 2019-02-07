@@ -8,6 +8,7 @@ FactoryBot.define do
     content { 'testtesttest' }
     deadline { '2019-02-03' }
     status {'完了'}
+    # user
   end
 
   # 作成するテストデータの名前を「second_task」とします
@@ -17,5 +18,6 @@ FactoryBot.define do
     content { 'samplesample' }
     deadline { '2019-02-03' }
     status {'着手中'}
+    # user
   end
 end

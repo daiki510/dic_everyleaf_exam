@@ -7,25 +7,23 @@ class TasksController < ApplicationController
   PER = 8
 
   def index
-    #ログインしているユーザーのみTaskデータを取り出す
-    @tasks = current_user.tasks.sort_create #作成順
+    #ソート
+    @tasks = Task.sort_create #作成順
     # raise
-    
+    @tasks = Task.all.sort_deadline if params[:sort_expired] #終了期限
+    @tasks = Task.all.sort_priority if params[:sort_priority]#優先順位
+
     #検索
     if params[:title] && params[:status]
-      @tasks = current_user.tasks.search_with_title(params[:title]).search_with_status(params[:status])#タイトルとステータスで検索
+      @tasks = Task.all.search_with_title(params[:title]).search_with_status(params[:status])#タイトルとステータスで検索
     elsif params[:title]
       @tasks = search_with_title(params[:title])#タイトルで検索
     elsif params[:status]
       @tasks = search_with_status(params[:status])#ステータスで検索
     end
 
-    #ソート
-    @tasks = current_user.tasks.sort_priority if params[:sort_priority] == "true"#優先順位
-    @tasks = current_user.tasks.sort_deadline if params[:sort_expired] == "true" #終了期限
-    
-    #ページネーション追加
-    @tasks = @tasks.page(params[:page]).per(PER)
+    #ログインしているユーザーのみTaskデータを取り出す
+    @tasks = @tasks.page(params[:page]).per(PER)#ページネーション追加
   end
 
   def new
