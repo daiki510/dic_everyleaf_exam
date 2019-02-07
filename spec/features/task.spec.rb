@@ -1,50 +1,38 @@
 require 'rails_helper'
 
 RSpec.feature "タスク管理機能", type: :feature do
-
-  #テストで使用するデータを共通化
-  # background do
-  #   FactoryBot.create(:task)
-  #   # FactoryBot.create(:task, title: '付け加えた名前１')
-  #   # FactoryBot.create(:second_task)
-  # end
-
-  #タスク一覧のテスト
-  # scenario "タスク一覧画面に遷移したら、作成済みのタスクが表示される" do
-  before do
+  feature '一覧表示機能' do
     #ユーザー１を作成する
-    user_1 = FactoryBot.create(:user, name: 'testuser_01', email: 'testuser_01@gmail.com')
-    #作成者がユーザー１であるタスクを作成する
-    FactoryBot.create(:task, user: user_1)
-  end
+    let(:user_01) { FactoryBot.create(:user, name: 'testuser_01', email: 'testuser_01@gmail.com') } 
+    let(:user_02) { FactoryBot.create(:user, name: 'testuser_02', email: 'testuser_02@gmail.com') } 
 
-  context "ユーザー1がログインしている時" do
     before do
+      #作成者がユーザー１であるタスクを作成する
+      FactoryBot.create(:task, user: user_01)
+
       #ユーザー1でログインする
       visit new_session_path
-      fill_in 'Email', with: 'testuser_01@gmail.com'
-      fill_in 'Password',	with: "000000" 
+      fill_in 'Email', with: login_user.email
+      fill_in 'Password',	with: login_user.password
       click_button 'Log in'
     end
-    scenario "ユーザー1が作成したタスクが表示される" do
-      #作成済みのタスクの名称が画面上に表示されていることを確認
-      expect(page).to have_content 'testtesttest'
+
+    context "ユーザー1がログインしている時" do
+      let(:login_user) { user_01 } 
+
+      scenario "ユーザー1が作成したタスクが表示される" do
+        #作成済みのタスクの名称が画面上に表示されていることを確認
+        expect(page).to have_content 'testtesttest'
+      end
     end
-  end
-  context "ユーザー2がログインしている時" do
-    before do
-      #ユーザー2を作成する
-      FactoryBot.create(:user, name: 'testuser_02', email: 'testuser_02@gmail.com')
-      #ユーザー2でログインする
-      visit new_session_path
-      fill_in 'Email', with: 'testuser_02@gmail.com'
-      fill_in 'Password',	with: "000000" 
-      click_button 'Log in'
-    end
-    scenario "ユーザー1が作成したタスクが表示されない" do
-      #作成済みのタスクの名称が画面上に表示されないことを確認
-      save_and_open_page
-      expect(page).not_to have_content 'testtesttest'
+    context "ユーザー2がログインしている時" do
+      let(:login_user) { user_02 } 
+
+      scenario "ユーザー1が作成したタスクが表示されない" do
+        #作成済みのタスクの名称が画面上に表示されないことを確認
+        save_and_open_page
+        expect(page).not_to have_content 'testtesttest'
+      end
     end
   end
 end
