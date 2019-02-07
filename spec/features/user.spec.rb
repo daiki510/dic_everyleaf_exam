@@ -1,71 +1,90 @@
 require 'rails_helper'
 
 RSpec.feature "ユーザー管理機能", type: :feature do
+  feature '新規登録機能' do
 
-  # テストで使用するデータを共通化
-  background do
-    FactoryBot.create(:user)
-    # FactoryBot.create(:task, title: '付け加えた名前１')
+    before do 
+      visit new_user_path
+      fill_in "メールアドレス",	with: "test_user@gmail.com" 
+      fill_in "パスワード",	with: "000000" 
+      fill_in "パスワード確認用",	with: "000000" 
+    end
+
+    it "新規登録画面で名前を入力した時、正常に登録される" do
+      fill_in "名前",	with: "test_user" 
+      
+      click_button '登録する'
+
+      expect(page).to have_selector ".notice", text: "ユーザー登録が完了しました"
+    end
+
+    it "新規作成画面で名称を入力しなかった時、エラーとなる" do
+      fill_in "名前",	with: "" 
+      
+      click_button '登録する'
+      
+      within "#error_explanation" do
+        expect(page).to have_content "名前を入力してください"
+      end
+    end
   end
 
-  #ユーザー登録のテスト
-  scenario "ユーザー登録画面で、必要項目を入力してcreateボタンを押したらデータが保存され,ユーザー詳細画面が表示される" do
-    visit new_user_path
-    
-    fill_in "名前",	with: "test_user" 
-    fill_in "メールアドレス",	with: "test_user@gmail.com" 
-    fill_in "パスワード",	with: "000000" 
-    fill_in "パスワード確認用",	with: "000000" 
-    
-    click_button '登録する'
-    
-    expect(page).to  have_content 'test_user'
-    expect(page).to  have_content 'test_user@gmail.com'
+  feature 'ログイン・ログアウト機能' do
+    before do 
+      FactoryBot.create(:user)
 
-  end
-
-  #ログイン確認テスト
-  scenario "ログインした後に、ヘッダーにログイン者の名前があるかどうかのテスト" do
-    visit new_session_path
-   
-    fill_in "Email",	with: "testuser@gmail.com"
-    fill_in "Password",	with: "000000"
-    
-    click_button 'Log in'
-    save_and_open_page
-    
-    expect(page).to have_content "testuser"
-  end
-
-  #ユーザー詳細画面の確認テスト
-  scenario "ユーザー名をクリックするとユーザー詳細画面が見れるかどうかのテスト" do
-    visit new_session_path
-   
-    fill_in "Email",	with: "testuser@gmail.com"
-    fill_in "Password",	with: "000000"
-    
-    click_button 'Log in'
-
-    click_link 'testuser'
-    save_and_open_page
-    expect(page).to have_content "testuser"
-    expect(page).to have_content "testuser@gmail.com"
-  end
+      visit new_session_path
+    end
+    context "ログインテスト" do 
+      it "ログインに成功した時" do 
+        fill_in "Email",	with: "testuser@gmail.com"
+        fill_in "Password",	with: "000000"
+        
+        click_button 'Log in'
+        
+        expect(page).to have_selector ".notice", text: "ログインしました"
+      end
   
-  #ログアウト確認テスト
-  scenario "ログアウトした後にログイン画面が出てくるかどうかのテスト" do
+      it "emailを間違えて、ログインに失敗した時" do 
+        fill_in "Email",	with: "test@gmail.com"
+        fill_in "Password",	with: "000000"
+        
+        click_button 'Log in'
+        
+        expect(page).to have_selector ".danger", text: "ログインに失敗しました"
+      end
+    end
+    context "ログアウトテスト" do 
+      it "ログイン後に、ログアウトした時" do 
+        fill_in "Email",	with: "testuser@gmail.com"
+        fill_in "Password",	with: "000000"
+        
+        click_button 'Log in'
+        #ログイン後の動作
+        click_link 'ログアウト'
   
-  visit new_session_path
-   
-  fill_in "Email",	with: "testuser@gmail.com"
-  fill_in "Password",	with: "000000"
-  
-  click_button 'Log in'
+        expect(page).to have_current_path "/sessions/new"
+      end
+    end
 
-  click_link 'ログアウト'
-  save_and_open_page
+  end
 
-  expect(page).to have_current_path "/sessions/new"
+  feature '詳細表示機能' do
+    before do 
+      FactoryBot.create(:user)
+
+      visit new_session_path
+    end
+    it "ユーザー名をクリックするとユーザー詳細画面が見れるかどうか" do
+      fill_in "Email",	with: "testuser@gmail.com"
+      fill_in "Password",	with: "000000"
+      
+      click_button 'Log in'
+      
+      click_link 'testuser'
+      save_and_open_page
+      expect(page).to have_content "testuser"
+      expect(page).to have_content "testuser@gmail.com"
+    end
   end
 end
-
