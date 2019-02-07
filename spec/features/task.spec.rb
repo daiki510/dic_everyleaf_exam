@@ -18,18 +18,33 @@ RSpec.feature "タスク管理機能", type: :feature do
     FactoryBot.create(:task, user: user_1)
   end
 
-  context "ユーザーAがログインしている時" do
+  context "ユーザー1がログインしている時" do
     before do
       #ユーザー1でログインする
       visit new_session_path
       fill_in 'Email', with: 'testuser_01@gmail.com'
-      fill_in 'Password',	with: "test01" 
+      fill_in 'Password',	with: "000000" 
       click_button 'Log in'
     end
-    scenario "ユーザー１が作成したタスクが表示される" do
+    scenario "ユーザー1が作成したタスクが表示される" do
       #作成済みのタスクの名称が画面上に表示されていることを確認
-      save_and_open_page
       expect(page).to have_content 'testtesttest'
+    end
+  end
+  context "ユーザー2がログインしている時" do
+    before do
+      #ユーザー2を作成する
+      FactoryBot.create(:user, name: 'testuser_02', email: 'testuser_02@gmail.com')
+      #ユーザー2でログインする
+      visit new_session_path
+      fill_in 'Email', with: 'testuser_02@gmail.com'
+      fill_in 'Password',	with: "000000" 
+      click_button 'Log in'
+    end
+    scenario "ユーザー1が作成したタスクが表示されない" do
+      #作成済みのタスクの名称が画面上に表示されないことを確認
+      save_and_open_page
+      expect(page).not_to have_content 'testtesttest'
     end
   end
 end

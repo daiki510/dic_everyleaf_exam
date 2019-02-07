@@ -28,28 +28,28 @@ RSpec.feature "ユーザー管理機能", type: :feature do
   scenario "ログインした後に、ヘッダーにログイン者の名前があるかどうかのテスト" do
     visit new_session_path
    
-    fill_in "Email",	with: "test01@gmail.com"
-    fill_in "Password",	with: "test01"
+    fill_in "Email",	with: "testuser@gmail.com"
+    fill_in "Password",	with: "000000"
     
     click_button 'Log in'
     save_and_open_page
     
-    expect(page).to have_content "test01"
+    expect(page).to have_content "testuser"
   end
 
   #ユーザー詳細画面の確認テスト
   scenario "ユーザー名をクリックするとユーザー詳細画面が見れるかどうかのテスト" do
     visit new_session_path
    
-    fill_in "Email",	with: "test01@gmail.com"
-    fill_in "Password",	with: "test01"
+    fill_in "Email",	with: "testuser@gmail.com"
+    fill_in "Password",	with: "000000"
     
     click_button 'Log in'
 
-    click_link 'test01'
+    click_link 'testuser'
     save_and_open_page
-    expect(page).to have_content "test01"
-    expect(page).to have_content "test01@gmail.com"
+    expect(page).to have_content "testuser"
+    expect(page).to have_content "testuser@gmail.com"
   end
   
   #ログアウト確認テスト
@@ -57,8 +57,8 @@ RSpec.feature "ユーザー管理機能", type: :feature do
   
   visit new_session_path
    
-  fill_in "Email",	with: "test01@gmail.com"
-  fill_in "Password",	with: "test01"
+  fill_in "Email",	with: "testuser@gmail.com"
+  fill_in "Password",	with: "000000"
   
   click_button 'Log in'
 
