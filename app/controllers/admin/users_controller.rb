@@ -2,10 +2,9 @@ class Admin::UsersController < ApplicationController
   before_action :require_admin
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
-  # PER = 10
+  PER = 10
   def index
-    @users = User.all
-    # page(params[:page])
+    @users = User.page(params[:page]).per(PER)
   end
 
   def new
@@ -22,7 +21,7 @@ class Admin::UsersController < ApplicationController
   end
 
   def show
-    
+    # raise
   end
 
   def edit

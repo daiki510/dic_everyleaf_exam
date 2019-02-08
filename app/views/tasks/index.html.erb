@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="task-index">
+  <div class="index-box">
     <h1>タスク一覧</h1>
 
     <div class="search-box">
@@ -12,7 +12,7 @@
       <% end %>
     </div>
 
-    <div class="task-menus">
+    <div class="index-menus">
       <%= link_to "タスク登録", new_task_path ,class: "new_task_btn" %>
       <span>ソート: </span>
       <%= link_to "作成順", tasks_path , class: "sort-menus" %>
