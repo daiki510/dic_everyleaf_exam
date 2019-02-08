@@ -1,4 +1,6 @@
 class Admin::UsersController < ApplicationController
+  before_action :require_admin
+
   def new
   end
 
@@ -9,5 +11,13 @@ class Admin::UsersController < ApplicationController
   end
 
   def index
+  end
+
+  private
+
+  def require_admin
+    unless current_user.admin? 
+     redirect_to root_path , notice: "権限がありません"
+    end
   end
 end
