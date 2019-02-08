@@ -14,4 +14,7 @@ class Task < ApplicationRecord
   scope :sort_create, -> { order(created_at: :desc) }
   scope :search_with_title, -> (title){ where('title LIKE ?' , "%#{title}%") }
   scope :search_with_status, -> (status){ where('status LIKE ?' , "%#{status}%") }
+
+  #UserモデルとTaskモデルの紐付け
+  belongs_to :user
 end

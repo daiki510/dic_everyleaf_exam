@@ -2,6 +2,7 @@ ja:
   activerecord:
     models:
       task: "タスク"
+      user: "ユーザー"
     attributes:
       task:
         title: "タイトル"
@@ -9,6 +10,11 @@ ja:
         deadline: "終了期限"
         status: "ステータス"
         priority: "優先順位"
+      user:
+        name: "名前"
+        email: "メールアドレス"
+        password: "パスワード"
+        password_confirmation: "パスワード確認用"
   views:
     pagination:
       first: "最初"
