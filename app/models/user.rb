@@ -10,5 +10,5 @@ class User < ApplicationRecord
   has_secure_password
 
   #UserモデルとTaskモデルの紐付け
-  has_many :tasks
+  has_many :tasks, dependent: :destroy #ユーザーが削除されると同時にタスクも削除
 end
