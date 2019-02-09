@@ -40,10 +40,15 @@
   margin-right: 10px;
 }
 
+.index-box {
+  text-align: center;
+}
+
 .index-box table {
   text-align: center;
   word-wrap: break-word;
   margin: 10px 0;
+  display: inline-block;
 }
 
 .index-box table th {
