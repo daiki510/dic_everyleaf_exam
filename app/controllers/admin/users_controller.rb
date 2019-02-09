@@ -1,10 +1,11 @@
 class Admin::UsersController < ApplicationController
   before_action :require_admin
+  before_action :prohibited_admin_destroy, only: [:destroy]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   PER = 10
   def index
-    @users = User.page(params[:page]).per(PER)
+    @users = User.all.order(admin: :desc).page(params[:page]).per(PER)
   end
 
   def new
@@ -54,6 +55,13 @@ class Admin::UsersController < ApplicationController
   def require_admin
     unless current_user.admin? 
      redirect_to root_path , notice: "権限がありません"
+    end
+  end
+
+  #管理者自身が自分のアカウントを削除できないように制御
+  def prohibited_admin_destroy
+    if current_user.admin? && current_user === @user 
+      redirect_to admin_users_path , notice: "管理者の削除はできません"
     end
   end
 end

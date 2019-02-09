@@ -34,10 +34,12 @@
         </div>
       <% end %>
 
-      <div class="field">
-        <%= f.label :admin %>
-        <%= f.check_box :admin %>
-      </div>
+      <% unless current_user.admin && current_user.id == @user.id %>
+        <div class="field">
+          <%= f.label :admin %>
+          <%= f.check_box :admin %>
+        </div>
+       <% end %>
     </div>
 
     <div class="actions">
