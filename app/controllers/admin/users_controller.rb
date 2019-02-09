@@ -1,5 +1,6 @@
 class Admin::UsersController < ApplicationController
-  before_action :require_admin
+  before_action :forbid_before_login
+  before_action :forbid_general_user
   before_action :prohibited_admin_destroy, only: [:destroy]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
@@ -52,9 +53,16 @@ class Admin::UsersController < ApplicationController
   end
 
   #管理者のみユーザー管理画面へアクセスできるように制御
-  def require_admin
-    unless current_user.admin? 
+  def forbid_general_user
+    unless current_user.admin?
      redirect_to root_path , notice: "権限がありません"
+    end
+  end
+  
+  #ログイン前に管理画面へアクセスできないように制御
+  def forbid_before_login
+    unless current_user
+      redirect_to new_session_path , notice: "権限がありません"
     end
   end
 
