@@ -20,9 +20,9 @@ ActiveRecord::Schema.define(version: 2019_02_08_025438) do
     t.text "content", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.date "deadline", default: "2019-02-03", null: false
-    t.integer "priority", default: 0, null: false
+    t.date "deadline", default: "2019-02-11", null: false
     t.string "status", default: "未着手", null: false
+    t.integer "priority", default: 0, null: false
     t.bigint "user_id"
     t.index ["title"], name: "index_tasks_on_title"
     t.index ["user_id"], name: "index_tasks_on_user_id"

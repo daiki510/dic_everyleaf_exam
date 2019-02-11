@@ -16,5 +16,5 @@ class Task < ApplicationRecord
   scope :search_with_status, -> (status){ where('status LIKE ?' , "%#{status}%") }
 
   #UserモデルとTaskモデルの紐付け
-  belongs_to :user
+  belongs_to :user, optional: true
 end

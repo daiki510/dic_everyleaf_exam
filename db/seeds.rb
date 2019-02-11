@@ -6,6 +6,8 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+
+
 # ユーザーデータの作成
 (1..10).each do |i|
   @admin_user_i = User.create(
@@ -14,43 +16,30 @@
     password:  "000000",
     password_confirmation:  "000000",
     admin: true
-    )
-  end
-  # タスクデータの作成
-  (1..10).each do |i|
-    Task.create(
-      title:    "user#{i}のタスク1",
-      content: "user#{i}のタスク1の内容",
-      user_id: @admin_user_i.id
-    )
-    Task.create(
-      title:    "user#{i}のタスク2",
-      content: "user#{i}のタスク2の内容",
-      user_id: @admin_user_i.id
-    )
-  end
-      
-  # # ユーザーデータの作成
-  # (1..100).each do |i|
-  #   @user_i = User.create(
-  #     name:    "user_#{i}",
-  #     email: "user-#{i}@sample.com",
-  #     password:  "000000",
-  #     password_confirmation:  "000000"
-  #   )
-  # end
-  
-  # # タスクデータの作成
-  # (1..100).each do |i|
-  #   Task.create(
-  #     title:    "user#{i}のタスク1",
-  #     content: "user#{i}のタスク1の内容",
-  #     user_id: @user_i.id
-  #   )
-  #   Task.create(
-  #     title:    "user#{i}のタスク2",
-  #     content: "user#{i}のタスク2の内容",
-  #     user_id: @user_i.id
-  #   )
-  # end
+  )
+end
+
+# ユーザーデータの作成
+(11..100).each do |i|
+  @user_i = User.create(
+    name:    "user_#{i}",
+    email: "user-#{i}@sample.com",
+    password:  "000000",
+    password_confirmation:  "000000"
+  )
+end
+
+# タスクデータの作成
+User.all.each do |user|
+  Task.create(
+    title:    "user#{user.id}のタスク1",
+    content: "user#{user.id}のタスク1の内容",
+    user_id: user.id
+  )
+  Task.create(
+    title:    "user#{user.id}のタスク2",
+    content: "user#{user.id}のタスク2の内容",
+    user_id: user.id
+  )
+end
 
