@@ -6,19 +6,40 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-#タスクデータの作成
-# 100.times do |i|
-#   Task.create!(
-#     title:    "task#{i}",
-#     content: "task#{i}の内容"
-#   )
-# end
 
-#ユーザーデータの作成
-10.times do |i|
-  User.create!(
-    name:    "user_#{i}",
-    email: "user-#{i}@gmail.com",
-    password_digest:  "user-#{i}"
+
+# ユーザーデータの作成
+(1..10).each do |i|
+  @admin_user_i = User.create(
+    name:    "admin_user_#{i}",
+    email: "admin_user_#{i}@sample.com",
+    password:  "000000",
+    password_confirmation:  "000000",
+    admin: true
   )
 end
+
+# ユーザーデータの作成
+(11..100).each do |i|
+  @user_i = User.create(
+    name:    "user_#{i}",
+    email: "user-#{i}@sample.com",
+    password:  "000000",
+    password_confirmation:  "000000"
+  )
+end
+
+# タスクデータの作成
+User.all.each do |user|
+  Task.create(
+    title:    "user#{user.id}のタスク1",
+    content: "user#{user.id}のタスク1の内容",
+    user_id: user.id
+  )
+  Task.create(
+    title:    "user#{user.id}のタスク2",
+    content: "user#{user.id}のタスク2の内容",
+    user_id: user.id
+  )
+end
+

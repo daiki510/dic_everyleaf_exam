@@ -25,7 +25,6 @@ RSpec.feature "タスク管理機能", type: :feature do
   feature '一覧表示機能' do
     context "ユーザー1がログインしている時" do
       let(:login_user) { user_01 } 
-
       it_behaves_like "ユーザー1が作成したタスクが表示される"
     end
 
@@ -51,8 +50,6 @@ RSpec.feature "タスク管理機能", type: :feature do
       it_behaves_like "ユーザー1が作成したタスクが表示される"
     end
   end
-
-  # save_and_open_page
 
   feature '新規作成機能' do
     let(:login_user) { user_01 } 

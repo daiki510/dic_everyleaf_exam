@@ -27,55 +27,62 @@
   background-color: rgb(78, 78, 78);
 }
 
-.task-menus {
-  margin: 20px 0;
+.index-menus {
+  margin: 20px 0 20px 20px;
+  text-align: left;
 }
 
-.task-menus span {
+.index-menus span {
   margin-left: 20px;
 }
 
 
-.task-menus .sort-menus {
+.index-menus .sort-menus {
   margin-right: 10px;
 }
 
-.task-index table {
+.index-box {
+  text-align: center;
+  padding: 0 15px;
+}
+
+.index-box table {
   text-align: center;
   word-wrap: break-word;
   margin: 10px 0;
+  display: inline-block;
 }
 
-.task-index table th {
+.index-box table th {
   color: rgb(226, 226, 226);
   background: #696867;
 }
 
-.task-index table td {
+.index-box table td {
   padding: 8px 10px;
 }
 
-.task-index table th#title {
+.index-box table th#title {
   width: 15%;
 }
 
-.task-index table th#content {
+.index-box table th#content {
   width: 30%;
 }
 
-.task-index table th#deadline {
+.index-box table th#deadline {
   width: 15%;
 }
 
-.task-index table th#status {
+.index-box table th#status {
   width: 15%;
 }
 
-.task-index table th#priority {
+.index-box table th#priority {
   width: 12%;
 }
 
-.task-index table th#task-menu {
+.index-box table th#task-menu {
   width: 20%;
 }
 
@@ -113,6 +120,10 @@ table a:hover {
 
 .fa-info:hover {
   color: rgb(29, 97, 175);
+}
+
+#no_task_comment {
+  text-align: center;
 }
 
 //  =================================================================

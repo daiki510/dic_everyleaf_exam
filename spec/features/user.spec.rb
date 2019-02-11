@@ -1,5 +1,7 @@
 require 'rails_helper'
 
+# save_and_open_page
+
 RSpec.feature "ユーザー管理機能", type: :feature do
   feature '新規登録機能' do
 
@@ -82,7 +84,7 @@ RSpec.feature "ユーザー管理機能", type: :feature do
       click_button 'Log in'
       
       click_link 'testuser'
-      save_and_open_page
+      
       expect(page).to have_content "testuser"
       expect(page).to have_content "testuser@gmail.com"
     end
