@@ -14,6 +14,14 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem 'bootsnap', '>= 1.1.0', require: false
 
+#ページネーション
+gem 'kaminari', '~> 0.17.0'
+
+gem 'font-awesome-rails'
+
+#has_secure_passwordメソッドを使用するため
+gem 'bcrypt', '3.1.11'
+
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 

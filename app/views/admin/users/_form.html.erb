@@ -1,0 +1,51 @@
+<div class="form">
+  <%= form_with model: [:admin, @user], local: true do |f| %>
+
+    <% if @user.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= @user.errors.count %>件のエラーがあります。</h2>
+
+        <ul>
+          <% @user.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="user-form">
+      <div class="field">
+        <%= f.label :name %>
+        <%= f.text_field :name %>
+      </div>
+      <div class="field">
+        <%= f.label :email %>
+        <%= f.email_field :email %>
+      </div>
+
+      <% if params[:id].nil? %>
+        <div class="field">
+          <%= f.label :password %>
+          <%= f.password_field :password %>
+        </div>
+        <div class="field">
+          <%= f.label :password_confirmation %>
+          <%= f.password_field :password_confirmation %>
+        </div>
+      <% end %>
+
+      <% unless current_user.admin && current_user.id == @user.id %>
+        <div class="field">
+          <%= f.label :admin %>
+          <%= f.check_box :admin %>
+        </div>
+       <% end %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit %>
+      <%= link_to "戻る", admin_users_path %>
+    </div>
+  <% end %>
+</div>
+

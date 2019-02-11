@@ -2,8 +2,25 @@ ja:
   activerecord:
     models:
       task: "タスク"
+      user: "ユーザー"
     attributes:
       task:
         title: "タイトル"
         content: "内容"
+        deadline: "終了期限"
+        status: "ステータス"
+        priority: "優先順位"
+      user:
+        name: "名前"
+        email: "メールアドレス"
+        password: "パスワード"
+        password_confirmation: "パスワード確認用"
+        admin: "管理者権限"
+  views:
+    pagination:
+      first: "最初"
+      last: "最後"
+      previous: "« 前ページ"
+      next: "次ページ »"
+      truncate: "..."
       

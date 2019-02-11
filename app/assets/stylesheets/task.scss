@@ -1,0 +1,341 @@
+//  =================================================================
+//  タスク一覧
+//  =================================================================
+.search-box input {
+  margin-right: 10px;
+  border-radius: 5px;
+  box-shadow: none;
+  border: 1px solid rgb(167, 167, 167);
+}
+
+.search-box select#status {
+  margin-right: 10px;
+  width: 80px;
+  padding-left: 15px;
+}
+
+.search-box .search-btn {
+  margin-right: 10px;
+  width: 80px;
+  background-color: #696867;
+  border: 1px solid rgb(167, 167, 167);
+  color: #fff;
+  transition: .4s;
+}
+
+.search-box .search-btn:hover {
+  background-color: rgb(78, 78, 78);
+}
+
+.index-menus {
+  margin: 20px 0 20px 20px;
+  text-align: left;
+}
+
+.index-menus span {
+  margin-left: 20px;
+}
+
+
+.index-menus .sort-menus {
+  margin-right: 10px;
+}
+
+.index-box {
+  text-align: center;
+  padding: 0 15px;
+}
+
+.index-box table {
+  text-align: center;
+  word-wrap: break-word;
+  margin: 10px 0;
+  display: inline-block;
+}
+
+.index-box table th {
+  color: rgb(226, 226, 226);
+  background: #696867;
+}
+
+.index-box table td {
+  padding: 8px 10px;
+}
+
+.index-box table th#title {
+  width: 15%;
+}
+
+.index-box table th#content {
+  width: 30%;
+}
+
+.index-box table th#deadline {
+  width: 15%;
+}
+
+.index-box table th#status {
+  width: 15%;
+}
+
+.index-box table th#priority {
+  width: 12%;
+}
+
+.index-box table th#task-menu {
+  width: 20%;
+}
+
+table i {
+  margin-right: 10px;
+}
+
+table i:first-child {
+  margin-left: 10px;
+}
+
+table a:hover {
+  text-decoration: none;
+}
+
+.fa-trash {
+  color: rgb(172, 140, 140);
+}
+
+.fa-trash:hover {
+  color: rgb(180, 101, 101);
+}
+
+.fa-edit {
+  color: rgb(70, 156, 123);
+}
+
+.fa-edit:hover {
+  color: rgb(27, 88, 65);
+}
+
+.fa-info {
+  color: rgb(98, 160, 231);
+}
+
+.fa-info:hover {
+  color: rgb(29, 97, 175);
+}
+
+#no_task_comment {
+  text-align: center;
+}
+
+//  =================================================================
+//  タスク詳細
+//  =================================================================
+.task-info {
+  margin-bottom: 0.75em;
+  width: 100%;
+}
+
+.task-info ul {
+  background: #fafafa;
+  border: none;
+  border-bottom: 2px solid #e9e9e9;
+  color: #666;
+  font-size: 1.5em;
+  height: auto;
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.task-info li {
+  // display: block;
+  width: 100%;
+}
+
+.task-info .info-title {
+  font-size: 0.7em;
+}
+
+.task-show .form-footer a {
+  margin-right: 20px;
+  font-size: 1.2em;
+}
+
+.task-show .form-footer a:last-child {
+  margin-right: 0;
+}
+
+// .task-info input#task_deadline,
+// .task-info select#task_status,
+// .task-info select#task_priority {
+//   background: #fafafa;
+//   border: none;
+//   border-bottom: 2px solid #e9e9e9;
+//   color: #666;
+//   font-size: 1.2em;
+//   height: 50px;
+//   transition: border-color 0.3s;
+//   width: 50%;
+//   padding-left: 20px;
+// }
+
+
+//  =================================================================
+//  タスク登録
+//  =================================================================
+
+/* Form Layout */
+.form-wrapper {
+  background: #fafafa;
+  margin: 3em auto;
+  padding: 0 1em;
+  max-width: 370px;
+  padding: 40px;
+}
+
+.form-wrapper h1 {
+  color: #666;
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 30px;
+}
+
+.form-item {
+  margin-bottom: 0.75em;
+  width: 100%;
+}
+
+.form-item input#task_title,
+.form-item textarea,
+.form-item input#task_deadline,
+.form-item select#task_status,
+.form-item select#task_priority {
+  background: #fafafa;
+  border: none;
+  border-bottom: 2px solid #e9e9e9;
+  color: #666;
+  font-size: 1.5em;
+  height: 50px;
+  transition: border-color 0.3s;
+  width: 100%;
+}
+
+.form-item textarea {
+  height: auto;
+}
+
+.form-item input#task_deadline,
+.form-item select#task_status,
+.form-item select#task_priority {
+  font-size: 1.2em;
+  height: 50px;
+  width: 50%;
+  padding-left: 20px;
+}
+
+.form-item input#task_deadline {
+  width: 65%;
+}
+
+.form-item .deadline-label {
+  margin-right: 33px;
+}
+
+.form-item .priority-label {
+  margin-right: 75px;
+}
+
+.form-item .status-label {
+  margin-right: 60px;
+}
+
+.form-item input:focus {
+  border-bottom: 2px solid #c0c0c0;
+  outline: none;
+}
+
+.button-panel {
+  margin: 2em 0 0;
+  width: 100%;
+}
+
+.button-panel .button {
+  background: #f16272;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  height: 50px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1.2em;
+  letter-spacing: 0.05em;
+  text-align: center;
+  text-transform: uppercase;
+  transition: background 0.3s ease-in-out;
+  width: 100%;
+}
+
+.button:hover {
+  background: #ee3e52;
+}
+
+.form-footer {
+  font-size: 0.8em;
+  text-align: center;
+  margin-top: 15px;
+}
+
+.form-footer a {
+  color: #8c8c8c;
+  text-decoration: none;
+  transition: border-color 0.3s;
+}
+
+.form-footer a:hover {
+  border-bottom: 1px dotted #8c8c8c;
+}
+
+
+//  =================================================================
+//  タスク　ボタンデザイン
+//  =================================================================
+
+.new_task_btn {
+  display: inline-block;
+  padding: 0.2em 0.7em;
+  text-decoration: none;
+  background: #ee3e52;
+  color: #FFF;
+  border-radius: 4px;
+  box-shadow: 0px 0px 0px 5px #ee3e52;
+  border: dashed 1px #FFF;
+}
+
+.new_task_btn:hover {
+  border: dotted 1px #FFF;
+  text-decoration: none;
+  color: #fff;
+  opacity: 0.8;
+}
+
+.clear_btn {
+  display: inline-block;
+  padding: 0 0.5em;
+  text-decoration: none;
+  color: #007bff;
+  border: solid 1px #007bff;
+  border-radius: 3px;
+  transition: .4s;
+}
+
+.clear_btn:hover {
+  background: #007bff;
+  color: white;
+  text-decoration: none;
+}
+
+.page-item.active .page-link {
+  background-color: #767777;
+  border-color: #767777;
+}
+
+.page-item .page-link {
+  color: #696867;
+}
