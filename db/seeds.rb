@@ -7,7 +7,6 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
-
 # ユーザーデータの作成
 (1..10).each do |i|
   @admin_user_i = User.create(
