@@ -17,4 +17,8 @@ class Task < ApplicationRecord
 
   #UserモデルとTaskモデルの紐付け
   belongs_to :user, optional: true
+
+  #Labelモデルと紐付け
+  has_many :task_labels
+  has_many :labels, through: :task_labels
 end
