@@ -21,4 +21,5 @@ class Task < ApplicationRecord
   #Labelモデルと紐付け
   has_many :task_labels
   has_many :labels, through: :task_labels
+  # accepts_nested_attributes_for :labels
 end
