@@ -353,6 +353,14 @@ table a:hover {
   position: relative;
 }
 
+.label a {
+  color: white;
+}
+
+.label a:hover {
+  color: rgba(230, 230, 230, 0.7);
+}
+
 .label::before {
   position: absolute;
   top: 0;
@@ -377,4 +385,15 @@ table a:hover {
   margin-top: -3px;
   background-color: #fff;
   border-radius: 100%;
+}
+
+.task-info .label::before {
+  border-width: 15px 15px 15px 0px;
+}
+
+.task-info .label::after {
+  border-width: 15px 15px 15px 0px;
+  left: -4px;
+  width: 5px;
+  height: 5px;
 }

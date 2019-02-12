@@ -14,6 +14,7 @@ class Task < ApplicationRecord
   scope :sort_create, -> { order(created_at: :desc) }
   scope :search_with_title, -> (title){ where('title LIKE ?' , "%#{title}%") }
   scope :search_with_status, -> (status){ where('status LIKE ?' , "%#{status}%") }
+  scope :search_with_label, -> (label_id){ where(id: label_ids = TaskLabel.where(label_id: label_id).pluck(:task_id))}
 
   #UserモデルとTaskモデルの紐付け
   belongs_to :user, optional: true
@@ -21,5 +22,4 @@ class Task < ApplicationRecord
   #Labelモデルと紐付け
   has_many :task_labels
   has_many :labels, through: :task_labels
-  # accepts_nested_attributes_for :labels
 end

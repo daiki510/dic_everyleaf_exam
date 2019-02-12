@@ -8,7 +8,8 @@
         <%= f.text_field :title %>
         <%= f.label :status, 'ステータス検索' %>
         <%= f.select :status,[["未着手", "未着手"],["着手中","着手中"],["完了","完了"]], include_blank: true  %>
-        <%= f.submit '検索' ,class: "search-btn"%> <%= link_to 'クリア', tasks_path  ,class: "clear_btn"%>
+        <%= f.submit '検索' ,class: "search-btn"%> 
+        <%= link_to 'クリア', tasks_path  ,class: "clear_btn"%>
       <% end %>
     </div>
 
@@ -39,8 +40,8 @@
           <td><%= task.status %></td>
           <td><%= task.priority %></td>
           <td>
-            <% task.labels.each do |l| %>
-              <span class="label"><%= l.label_name %></span>
+            <% task.labels.each do |label| %>
+              <span class="label"><%= link_to label.label_name, tasks_path(label_id: label.id) %></span>
             <% end %>
           </td>
 
