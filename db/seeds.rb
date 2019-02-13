@@ -42,3 +42,8 @@ User.all.each do |user|
   )
 end
 
+# ラベルデータの作成
+(1..5).each do |i|
+  Label.create(label_name: "label_No:#{i}")
+end
+
