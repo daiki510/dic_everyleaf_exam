@@ -31,7 +31,7 @@ class TasksController < ApplicationController
 
   def new
     @task = Task.new
-    
+    2.times { @task.labels.build }
   end
 
   def create
@@ -69,7 +69,7 @@ class TasksController < ApplicationController
   end
   
   def task_params
-    params.require(:task).permit(:title, :content, :deadline, :status, :priority, :label_name, label_ids: [])
+    params.require(:task).permit(:title, :content, :deadline, :status, :priority, label_ids: [], labels_attributes: [:id, :label_name, :_destroy] )
   end
 
   #ログインしているユーザーのみタスク管理できる

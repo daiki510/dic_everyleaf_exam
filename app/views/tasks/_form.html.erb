@@ -41,18 +41,10 @@
            <%= f.select :priority, Task.priorities.keys, :selected=>Task.priorities[@task.priority] %>
         </div>
         <div class="form-item">
-          <%= f.label :label_ids, 'ラベル' %>
-          <%= f.collection_check_boxes :label_ids, Label.all, :id, :label_name do |l| %> 
-                                                                <%# include_hidden: false %>
-            <%= l.check_box + l.label %>
+          <%= f.fields_for :labels do |label| %>
+            <%= label.label :label_name, 'ラベル' %>
+            <%= label.text_field :label_name %>
           <% end %>
-
-         <%# <% Label.all.each do |label|  %>
-          <%# <%= f.check_box :label_ids, { multiple: true, checked: label[:checked], disabled: label[:disabled], include_hidden: false }, label[:id] %> 
-          <%# <%= label.label_name %> 
-        <%# <% end %>
-
-
         </div>
         <div class="button-panel">
           <%= f.submit class: "button" %>
