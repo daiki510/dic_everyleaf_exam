@@ -6,5 +6,9 @@ FactoryBot.define do
     status {'完了'}
     priority {'中'}
     user
+    
+    after(:create) do |task|
+      create(:label, tasks: [task])
+    end
   end
 end

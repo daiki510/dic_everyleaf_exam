@@ -23,6 +23,14 @@
           <li class="info-title">優先順位</li>
           <li><%= @task.priority %></li>
         </ul>
+        <ul>
+          <li class="info-title">ラベル</li>
+          <li>
+           <% @task.labels.each do |l| %>
+            <span class="label"><%= l.label_name %></span>
+           <% end %>
+          </li>
+        </ul>
       </div>
       
       <div class="form-footer">

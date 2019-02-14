@@ -9,7 +9,6 @@ class TasksController < ApplicationController
   def index
     #ログインしているユーザーのみTaskデータを取り出す
     @tasks = current_user.tasks.sort_create #作成順
-    # raise
     
     #検索
     if params[:title] && params[:status]
@@ -18,6 +17,8 @@ class TasksController < ApplicationController
       @tasks = search_with_title(params[:title])#タイトルで検索
     elsif params[:status]
       @tasks = search_with_status(params[:status])#ステータスで検索
+    elsif params[:label_id]
+      @tasks = Task.search_with_label(params[:label_id])#ラベルで検索
     end
 
     #ソート
@@ -30,7 +31,6 @@ class TasksController < ApplicationController
 
   def new
     @task = Task.new
-    
   end
 
   def create
@@ -68,7 +68,7 @@ class TasksController < ApplicationController
   end
   
   def task_params
-    params.require(:task).permit(:title, :content, :deadline, :status, :priority)
+    params.require(:task).permit(:title, :content, :deadline, :status, :priority, :label_name, label_ids: [])
   end
 
   #ログインしているユーザーのみタスク管理できる
