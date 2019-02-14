@@ -22,8 +22,8 @@
           <td><%= user.name %></td>
           <td><%= user.email %></td>
           <td><%= user.admin? ? '管理者' : '' %></td>
-          <td><%= user.created_at %></td>
-          <td><%= user.updated_at %></td>
+          <td><%= user.created_at.to_s(:published_on) %></td>
+          <td><%= user.updated_at.to_s(:published_on) %></td>
           <td><%= user.tasks.count %></td>
 
           <td>
