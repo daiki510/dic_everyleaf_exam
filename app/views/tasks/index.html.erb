@@ -41,7 +41,7 @@
           <td><%= task.priority %></td>
           <td>
             <% task.labels.each do |label| %>
-              <span class="label"><%= link_to label.label_name, tasks_path(label_id: label.id) %></span>
+              <span class="label"><%= link_to label.label_name, tasks_path(label_name: label.label_name) %></span>
             <% end %>
           </td>
 
