@@ -3,27 +3,19 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user
  
-
   PER = 8
 
   def index
     #ログインしているユーザーのみTaskデータを取り出す
-    @tasks = current_user.tasks.sort_create #作成順
+    has_tasks = current_user.tasks
+    @tasks = has_tasks.sort_create #作成順
     
     #検索
-    if params[:title] && params[:status]
-      @tasks = current_user.tasks.search_with_title(params[:title]).search_with_status(params[:status])#タイトルとステータスで検索
-    elsif params[:title]
-      @tasks = search_with_title(params[:title])#タイトルで検索
-    elsif params[:status]
-      @tasks = search_with_status(params[:status])#ステータスで検索
-    elsif params[:label_id]
-      @tasks = Task.search_with_label(params[:label_id])#ラベルで検索
-    end
+    @tasks = search_tasks(params, has_tasks)
 
     #ソート
-    @tasks = current_user.tasks.sort_priority if params[:sort_priority] == "true"#優先順位
-    @tasks = current_user.tasks.sort_deadline if params[:sort_expired] == "true" #終了期限
+    @tasks = has_tasks.sort_priority if params[:sort_priority] == "true"#優先順位
+    @tasks = has_tasks.sort_deadline if params[:sort_expired] == "true" #終了期限
     
     #ページネーション追加
     @tasks = @tasks.page(params[:page]).per(PER)
@@ -42,11 +34,9 @@ class TasksController < ApplicationController
     end
   end
 
-  def show
-  end
+  def show; end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @task.update(task_params)
@@ -71,12 +61,23 @@ class TasksController < ApplicationController
     params.require(:task).permit(:title, :content, :deadline, :status, :priority, :label_name, label_ids: [])
   end
 
-  #ログインしているユーザーのみタスク管理できる
-  def enssure_correct_user_for_task
-    @task = Task.find(params[:id])
-    if current_user.id != @task.user_id
-      redirect_to tasks_path, notice: "権限がありません"
+  def search_tasks(params, has_tasks)
+    if params[:title] && params[:status]
+      has_tasks.search_with_title(params[:title]).search_with_status(params[:status])#タイトルとステータスで検索
+    elsif params[:title]
+      search_with_title(params[:title])#タイトルで検索
+    elsif params[:status]
+      search_with_status(params[:status])#ステータスで検索
+    elsif params[:label_id]
+      Task.search_with_label(params[:label_id])#ラベルで検索
     end
   end
 
+  #ログインしているユーザーのみタスク管理できる
+  def enssure_correct_user_for_task
+    @task = Task.find(params[:id])
+    unless current_user.id == @task.user_id
+      redirect_to tasks_path, notice: "権限がありません"
+    end
+  end
 end
