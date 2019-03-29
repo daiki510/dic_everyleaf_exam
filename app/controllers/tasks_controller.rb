@@ -23,6 +23,7 @@ class TasksController < ApplicationController
 
   def new
     @task = Task.new
+    @task.deadline = Date.today
   end
 
   def create
@@ -70,6 +71,8 @@ class TasksController < ApplicationController
       search_with_status(params[:status])#ステータスで検索
     elsif params[:label_id]
       Task.search_with_label(params[:label_id])#ラベルで検索
+    else
+      has_tasks
     end
   end
 
