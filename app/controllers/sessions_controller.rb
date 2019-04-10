@@ -1,17 +1,16 @@
+# frozen_string_literal: true
+
 class SessionsController < ApplicationController
   before_action :authenticate_user, only: [:destroy]
-  before_action :forbid_login_user, only: [:new, :create]
+  before_action :forbid_login_user, only: %i[new create]
 
-  def new
-
-  end
+  def new; end
 
   def create
     user = User.find_by(email: params[:session][:email].downcase)
-    
-    if user && user.authenticate(params[:session][:password])
+    if user&.authenticate(params[:session][:password])
       session[:user_id] = user.id
-      redirect_to tasks_path, notice: "ログインしました"
+      redirect_to tasks_path, notice: 'ログインしました'
     else
       flash[:danger] = 'ログインに失敗しました'
       render 'new'
@@ -20,6 +19,6 @@ class SessionsController < ApplicationController
 
   def destroy
     session.delete(:user_id)
-    redirect_to new_session_path, notice: "ログアウトしました"
+    redirect_to new_session_path, notice: 'ログアウトしました'
   end
 end
