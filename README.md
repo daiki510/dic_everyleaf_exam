@@ -1,5 +1,18 @@
 # README
 
+## 概要
+### タスク管理アプリ
+
+万葉新入社員教育用カリキュラム
+https://github.com/everyleaf/el-training
+
+## 開発環境
+Rails 5.2.2
+Ruby 2.5.3
+Bunlder 2.0.1
+Rspec-rails 3.8.2
+
+
 ## Model
 
 >### Userモデル
@@ -51,14 +64,3 @@
 5. `git push heroku master`
 6. `heroku run rails db:migrate`<br>
 → herokuへデータベースの移行
-
-<br>
-
-## 開発環境
-Rails 5.2.2
-
-Ruby 2.5.3
-
-Bunlder 2.0.1
-
-Rspec-rails 3.8.2
